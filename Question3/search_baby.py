@@ -1,12 +1,19 @@
+
+import importlib
+import subprocess
+import sys
+
+def install_packages():
+    package = ['regex']
+    for p in package:
+        try:
+            importlib.import_module(p)
+            print(f'{p} is already installed')
+        except ImportError:
+            print('Standby for Installation of required packages')
+            subprocess.check_call([sys.executable, '-m', 'pip', 'install', p])
+
 import re
-import os
-
-import psycopg
-from psycopg.types.json import Jsonb
-from psycopg.rows import dict_row
-
-from dotenv import load_dotenv
-
 html = None
 
 # Please adopt use of path as reciding in your file manager.
@@ -88,6 +95,8 @@ def binary_search(ar, target, kw):
 
 
 def main():
+    install_packages()
+    
     while True:
         kw = None
         jd = None
